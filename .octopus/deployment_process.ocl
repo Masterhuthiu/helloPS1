@@ -7,14 +7,22 @@ step "hello-world-using-powershell" {
         properties = {
             Octopus.Action.RunOnServer = "true"
             Octopus.Action.Script.ScriptBody = <<-EOT
-                Write-Host 'Hello world, using PowerShell'
+                using Microsoft.AspNetCore.Mvc;
                 
-                #TODO: Experiment with steps of your own :)
+                [ApiController]
+                [Route("[controller]")]
+                public class HelloController : ControllerBase
+                {
+                    [HttpGet]
+                    public string Get()
+                    {
+                        return "Hello, World!";
+                    }
+                }
                 
-                Write-Host '[Learn more about the types of steps available in Octopus](https://oc.to/OnboardingAddStepsLearnMore)'
                 EOT
             Octopus.Action.Script.ScriptSource = "Inline"
-            Octopus.Action.Script.Syntax = "PowerShell"
+            Octopus.Action.Script.Syntax = "CSharp"
         }
     }
 }
