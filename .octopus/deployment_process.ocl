@@ -10,22 +10,13 @@ step "hello-world-using-powershell" {
             Octopus.Action.Package.AutomaticallyUpdateAppSettingsAndConnectionStrings = "True"
             Octopus.Action.RunOnServer = "true"
             Octopus.Action.Script.ScriptBody = <<-EOT
-                using Microsoft.AspNetCore.Mvc;
-                
-                [ApiController]
-                [Route("[controller]")]
-                public class HelloController : ControllerBase
-                {
-                    [HttpGet]
-                    public string Get()
-                    {
-                        return "Hello, World!";
-                    }
-                }
+                # Show .NET version using PowerShell
+                Write-Host "Checking installed .NET version..."
+                dotnet --version
                 
                 EOT
             Octopus.Action.Script.ScriptSource = "Inline"
-            Octopus.Action.Script.Syntax = "CSharp"
+            Octopus.Action.Script.Syntax = "PowerShell"
         }
     }
 }
