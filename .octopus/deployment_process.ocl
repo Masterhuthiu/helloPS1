@@ -10,9 +10,24 @@ step "hello-world-using-powershell" {
             Octopus.Action.Package.AutomaticallyUpdateAppSettingsAndConnectionStrings = "True"
             Octopus.Action.RunOnServer = "true"
             Octopus.Action.Script.ScriptBody = <<-EOT
-                # Show .NET version using PowerShell
-                Write-Host "Checking installed .NET version..."
-                dotnet --version
+                # Step 1: Define the project name
+                $projectName = "MyWebApp"
+                
+                # Step 2: Create a new .NET web project
+                Write-Host "Creating a new .NET web project: $projectName"
+                dotnet new webapp -n $projectName
+                
+                # Step 3: Navigate to the project directory
+                Set-Location -Path $projectName
+                
+                # Step 4: Build the project
+                Write-Host "Building the project..."
+                dotnet build
+                
+                # Step 5: Run the project
+                Write-Host "Running the project..."
+                dotnet run
+                
                 
                 EOT
             Octopus.Action.Script.ScriptSource = "Inline"
