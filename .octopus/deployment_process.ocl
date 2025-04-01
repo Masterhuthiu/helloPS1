@@ -5,6 +5,9 @@ step "hello-world-using-powershell" {
         action_type = "Octopus.Script"
         is_required = true
         properties = {
+            Octopus.Action.EnabledFeatures = "Octopus.Features.ConfigurationVariables,Octopus.Features.ConfigurationTransforms"
+            Octopus.Action.Package.AutomaticallyRunConfigurationTransformationFiles = "True"
+            Octopus.Action.Package.AutomaticallyUpdateAppSettingsAndConnectionStrings = "True"
             Octopus.Action.RunOnServer = "true"
             Octopus.Action.Script.ScriptBody = <<-EOT
                 using Microsoft.AspNetCore.Mvc;
